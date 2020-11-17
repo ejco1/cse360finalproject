@@ -1,4 +1,4 @@
-
+import java.lang.String;
 /*
 The object that will display all necessary information from the About Menu Select.
  */
@@ -19,13 +19,13 @@ public class AboutInfo {
     /*
     Returns the strings to be displayed onto the JPopup Menu
      */
-    public String retMembers(){
+    public String getMembers(){
         return members;
     }
     /*
     Returns the strings to be displayed onto the JPopup Menu
      */
-    public String retDesc(){
+    public String getDesc(){
         return description;
     }
 }
