@@ -1,6 +1,3 @@
-This is the CSE 360 Final Project.
+Ethan's commits to the project.
 
-Team Members:
-Ethan Co
-Jordan Slater
-Hunter Carmona
+So far completed: AboutInfo
