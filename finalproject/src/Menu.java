@@ -7,6 +7,7 @@ public class Menu extends JFrame {
 	static JFrame frame;
 	static JMenuBar menuBar;
 	static JMenu file, about;
+	static MyJTable table;
 	static JMenuItem loadRoster, addAttendace, save, plotData;
 	public static void main(String[] args)
 	{
@@ -15,6 +16,10 @@ public class Menu extends JFrame {
 		
 		//Create the menu bar
 		menuBar = new JMenuBar();
+		
+		//Create the JTable
+		table = new MyJTable();
+		table.setOpaque(true);
 		
 		//Create the menu bar items
 		file = new JMenu("File");
@@ -43,6 +48,11 @@ public class Menu extends JFrame {
 		
 		//Add menu bar to the frame
 		frame.setJMenuBar(menuBar);
+		
+		//Add the JTable to the frame
+		JPanel panel = new JPanel();
+		panel.add(new JScrollPane(table));
+		frame.add(panel);
 		
 		frame.setSize(1000, 1000);
 		frame.setVisible(true);
