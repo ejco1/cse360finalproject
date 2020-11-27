@@ -18,25 +18,33 @@ public class MyJTable extends JPanel {
                                 "ASURITE"};
  
         Object[][] data = {
-        {"320", "Kathy", "Smith",
-         "Snowboarding", new Integer(5), new Boolean(false)},
-        {"yes", "John", "Doe",
-         "Rowing", new Integer(3), new Boolean(true)},
-        {"send help", "Sue", "Black",
-         "Knitting", new Integer(2), new Boolean(false)},
-        {"THIS IS AN ID", "Jane", "White",
-         "Speed reading", new Integer(20), new Boolean(true)},
-        {"56411", "Joe", "Brown",
-         "Pool", new Integer(10), new Boolean(false)}
+        {"4916284751", "Kathy", "Smith",
+         "Music", "Freshman", "kksmith1"},
+        {"1346796431", "John", "Doe",
+         "Mathematics", "Senior", "jsdoe"},
+        {"1478523698", "Sue", "Black",
+         "Art", "Senior", "seblack5"},
+        {"1234567890", "Jane", "White",
+         "Computer Science", "Junior", "jowhite"},
+        {"1649358752", "Joe", "Brown",
+         "Business and Finance", "Sophomore", "jebrown12"}
         };
  
         final JTable table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        table.setPreferredScrollableViewportSize(new Dimension(900, 900));
         table.setFillsViewportHeight(true);
  
         //Create the scroll pane and add the table to it.
+        
         JScrollPane scrollPane = new JScrollPane(table);
- 
+        
+        //in case of emergency: need scrollbars always
+        /*
+        scrollPane.setHorizontalScrollBarPolicy(
+		JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(
+		JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+		*/
         //Add the scroll pane to this panel.
         add(scrollPane);
     }
