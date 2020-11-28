@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Scanner;
 
 public class Menu extends JFrame {
 	static JFrame frame;
@@ -9,7 +11,7 @@ public class Menu extends JFrame {
 	static JMenu file, about;
 	static MyJTable table;
 	static JMenuItem loadRoster, addAttendace, save, plotData;
-	public static void main(String[] args)
+	Menu()
 	{
 		//Create the frame
 		frame = new JFrame("CSE360 Final Project");
@@ -31,10 +33,53 @@ public class Menu extends JFrame {
 		save = new JMenuItem("Save");
 		plotData = new JMenuItem("Plot data");
 		
-		loadRoster.addActionListener(new MyActionListener());
-		addAttendace.addActionListener(new MyActionListener());
-		save.addActionListener(new MyActionListener());
-		plotData.addActionListener(new MyActionListener());
+		loadRoster.addActionListener(new ActionListener()	{
+			public void actionPerformed(ActionEvent event)
+			{
+				//This is where we load roster
+				File myFile;
+				Scanner fileChosen;
+				int response;
+				JFileChooser fileChooser = new JFileChooser("");
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				response = fileChooser.showOpenDialog(null);
+				if(response == JFileChooser.APPROVE_OPTION)
+				{
+					myFile = fileChooser.getSelectedFile();
+					//This is where we call method to parse file and add to table
+				}
+			}
+		});
+		addAttendace.addActionListener(new ActionListener()	{
+			public void actionPerformed(ActionEvent event)
+			{
+				//This is where we add attendance
+				File myFile;
+				Scanner fileChosen;
+				int response;
+				JFileChooser fileChooser = new JFileChooser("");
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				response = fileChooser.showOpenDialog(null);
+				if(response == JFileChooser.APPROVE_OPTION)
+				{
+					myFile = fileChooser.getSelectedFile();
+					//This is where we call method to parse file and add to table
+				}
+			}
+		});
+		save.addActionListener(new ActionListener()	{
+			public void actionPerformed(ActionEvent event)
+			{		
+				//This is where we save the roster	
+			}
+		});
+		plotData.addActionListener(new ActionListener()	{
+			public void actionPerformed(ActionEvent event)
+			{
+				//This is where we print the graph
+			}
+			
+		});
 		
 		//Add menu items to file menu
 		file.add(loadRoster);
@@ -57,6 +102,8 @@ public class Menu extends JFrame {
 		frame.setSize(1000, 1000);
 		frame.setVisible(true);
 	}
-	
-	
+	public static void main(String[] args) 
+	{
+		new Menu();
+	}
 }
