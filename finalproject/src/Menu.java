@@ -6,11 +6,15 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Menu extends JFrame {
+	/**
+	 * Default SerialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 	static JFrame frame;
 	static JMenuBar menuBar;
 	static JMenu file, about;
 	static MyJTable table;
-	static JMenuItem loadRoster, addAttendace, save, plotData;
+	static JMenuItem loadRoster, addAttendance, save, plotData;
 	Menu()
 	{
 		//Create the frame
@@ -26,10 +30,30 @@ public class Menu extends JFrame {
 		//Create the menu bar items
 		file = new JMenu("File");
 		about = new JMenu("About");
+
+		about.addActionListener(new ActionListener()	{
+			public void actionPerformed(ActionEvent event){
+				String authors = "Ethan Co, Hunter Carmona, Jordan Slater\n";
+				String desc = "This is a program designed to load in a class roster, add in the attendance for specific days and plot attendance data per student.\n";
+				
+				JPanel panel = new JPanel();
+				panel.setLayout(new FlowLayout());
+				panel.add(new JLabel(authors));
+				panel.add(new JLabel(desc));
+
+				final JDialog d = new JDialog();
+				d.setSize(200, 200);
+				d.setLocationRelativeTo(null);
+				d.add(panel);
+				d.setVisible(true);
+
+
+			}
+		});
 		
 		//Create the menu items
 		loadRoster = new JMenuItem("Load a roster");
-		addAttendace = new JMenuItem("Add attendance");
+		addAttendance = new JMenuItem("Add attendance");
 		save = new JMenuItem("Save");
 		plotData = new JMenuItem("Plot data");
 		
@@ -50,7 +74,7 @@ public class Menu extends JFrame {
 				}
 			}
 		});
-		addAttendace.addActionListener(new ActionListener()	{
+		addAttendance.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
 				//This is where we add attendance
@@ -83,7 +107,7 @@ public class Menu extends JFrame {
 		
 		//Add menu items to file menu
 		file.add(loadRoster);
-		file.add(addAttendace);
+		file.add(addAttendance);
 		file.add(save);
 		file.add(plotData);
 		
