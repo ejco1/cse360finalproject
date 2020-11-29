@@ -10,7 +10,7 @@ public class Menu extends JFrame {
 	static JMenuBar menuBar;
 	static JMenu file, about;
 	static MyJTable table;
-	static JMenuItem loadRoster, addAttendace, save, plotData, aboutItem;
+	static JMenuItem loadRoster, addAttendance, save, plotData, aboutItem;
 	Menu()
 	{
 		//Create the frame
@@ -29,7 +29,7 @@ public class Menu extends JFrame {
 		
 		//Create the menu items
 		loadRoster = new JMenuItem("Load a roster");
-		addAttendace = new JMenuItem("Add attendance");
+		addAttendance = new JMenuItem("Add attendance");
 		save = new JMenuItem("Save");
 		plotData = new JMenuItem("Plot data");
 		aboutItem = new JMenuItem("About");
@@ -52,7 +52,7 @@ public class Menu extends JFrame {
 			}
 		});
 		
-		addAttendace.addActionListener(new ActionListener()	{
+		addAttendance.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
 				//This is where we add attendance
@@ -122,7 +122,7 @@ public class Menu extends JFrame {
 		});
 		//Add menu items to file menu
 		file.add(loadRoster);
-		file.add(addAttendace);
+		file.add(addAttendance);
 		file.add(save);
 		file.add(plotData);
 		
