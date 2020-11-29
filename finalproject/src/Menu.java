@@ -6,6 +6,10 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Menu extends JFrame {
+	/**
+	 * Default SerialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 	static JFrame frame;
 	static JMenuBar menuBar;
 	static JMenu file, about;
@@ -26,7 +30,7 @@ public class Menu extends JFrame {
 		//Create the menu bar items
 		file = new JMenu("File");
 		about = new JMenu("About");
-		
+    
 		//Create the menu items
 		loadRoster = new JMenuItem("Load a roster");
 		addAttendance = new JMenuItem("Add attendance");
@@ -51,7 +55,6 @@ public class Menu extends JFrame {
 				}
 			}
 		});
-		
 		addAttendance.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
