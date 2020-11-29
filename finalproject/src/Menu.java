@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Scanner;
+import java.util.List;
 
 public class Menu extends JFrame {
 	/**
@@ -51,7 +52,18 @@ public class Menu extends JFrame {
 				if(response == JFileChooser.APPROVE_OPTION)
 				{
 					myFile = fileChooser.getSelectedFile();
-					//This is where we call method to parse file and add to table
+					FileHandler test = new FileHandler();
+					List<Student> testStudents = test.FileReadCSV(myFile);
+					for(Student a : testStudents)
+					{
+						System.out.println(a.ID);
+						System.out.println(a.firstN);
+						System.out.println(a.lastN);
+						System.out.println(a.program);
+						System.out.println(a.academicLevel);
+						System.out.println(a.ASURITE);
+						System.out.println(a.time);
+					}
 				}
 			}
 		});

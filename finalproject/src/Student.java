@@ -1,27 +1,30 @@
 import java.lang.String;
 
 public class Student{
-    String ASURITE;
+    String ID;
     String firstN;
     String lastN;
     String program;
     String academicLevel;
+    String ASURITE;
     int time;
 
     public Student(){
-    ASURITE = "";
+    ID = "";
     firstN = "";
     lastN = "";
     program = "";
     academicLevel = "";
+    ASURITE = "";
     time = 0;
     }
-    public Student(String ID, String fN, String lN, String prog, String level){
-        ASURITE = ID;
+    public Student(String id, String fN, String lN, String prog, String level, String asuRite){
+        ID = id;
         firstN = fN;
         lastN = lN;
         program = prog;
         academicLevel = level;
+        ASURITE = asuRite;
     }
     public void setTime(int t){
         time = t;
@@ -47,5 +50,9 @@ public class Student{
 
     public int getTime() {
         return time;
+    }
+    
+    public String getID() {
+    	return ID;
     }
 }
