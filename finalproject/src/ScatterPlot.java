@@ -25,8 +25,8 @@ public class ScatterPlot extends JFrame {
         //Create Dataset
         XYDataset dataset = createDataset();
         JFreeChart chart = ChartFactory.createScatterPlot(
-            "Cats Penis Size vs Dog Penis Size", 
-            "Cats", "Dogs", dataset, PlotOrientation.VERTICAL, true, false, false);
+            "Date of Lecture vs % of Lecture Attended", 
+            "Date", "% of Lecture Attended", dataset, PlotOrientation.VERTICAL, true, false, false);
         
         //Background Color
         XYPlot plot = (XYPlot)chart.getPlot();
