@@ -7,6 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
  
 public class MyJTable extends JPanel { 
+	//global declare the data to be updated
+	Object[][] data;
     public MyJTable() {
         super(new GridLayout(1,0));
  
