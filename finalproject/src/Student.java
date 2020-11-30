@@ -7,7 +7,7 @@ public class Student{
     String program;
     String academicLevel;
     String ASURITE;
-    int time;
+    double time;
 
     public Student(){
     ID = "";
@@ -25,8 +25,9 @@ public class Student{
         program = prog;
         academicLevel = level;
         ASURITE = asuRite;
+        time = 0;
     }
-    public void setTime(int t){
+    public void setTime(double t){
         time = t;
     }
     public String getAcademicLevel() {
@@ -48,7 +49,7 @@ public class Student{
         return program;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
     
