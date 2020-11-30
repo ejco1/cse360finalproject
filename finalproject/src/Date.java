@@ -20,13 +20,23 @@ public Date(String d){
 /*
 Array Getter.
 */
-public ArrayList<Student> getStudent(){
+public ArrayList<Student> getStudents(){
     return arrStudents;
+}
+/*
+Date Getter.
+*/
+public String getDate(){
+    return date;
 }
 /*
 Student Adder, to be used manually for testing purposes & through a bufferedReader for the Table purposes.
 */
-public void addStudent(Student toBeAdded){
+public void addStudent(Student s, double t){
+    Student toBeAdded = s;
+    double time = Math.round(t/75) * 100;
+
+    toBeAdded.setTime(time);
     arrStudents.add(toBeAdded);
 }
 }

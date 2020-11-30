@@ -6,6 +6,8 @@ import java.io.File;
 import java.util.Scanner;
 import java.util.List;
 
+import java.util.ArrayList;
+
 public class Menu extends JFrame {
 	/**
 	 * Default SerialVersionUID
@@ -38,6 +40,10 @@ public class Menu extends JFrame {
 		save = new JMenuItem("Save");
 		plotData = new JMenuItem("Plot data");
 		aboutItem = new JMenuItem("About");
+
+		//Data Items
+		ArrayList<Date> days = new ArrayList<Date>();
+		ArrayList<Student> students = new ArrayList<Student>();
 		
 		loadRoster.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
@@ -113,12 +119,24 @@ public class Menu extends JFrame {
 				//This is where we save the roster	
 			}
 		});
-		
+		/*
+		The constructor for ScatterPlot holds the Pane to be created, just fix up the size of the window here.
+		*/
 		plotData.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
 				//This is where we print the graph
+				ScatterPlot example = new ScatterPlot("Plot Attendance Data");
+				// Instantiate a list of Dates for a Student..
 				
+				// Input into a dataset..
+				example.addDataset(days);
+				// Either add a JPanel, replace JTable, or use JTabbedPane
+				
+            	example.setSize(800,400);
+            	example.setLocationRelativeTo(null);
+            	example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            	example.setVisible(true);
 			}
 			
 		});
