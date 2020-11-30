@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +18,8 @@ public class Menu extends JFrame {
 	static JFrame frame;
 	static JMenuBar menuBar;
 	static JMenu file, about;
-	static MyJTable table;
+	static JTable table;
+	static DefaultTableModel dtm;
 	static JMenuItem loadRoster, addAttendance, save, plotData, aboutItem;
 	Menu()
 	{
@@ -27,8 +30,11 @@ public class Menu extends JFrame {
 		menuBar = new JMenuBar();
 		
 		//Create the JTable
-		table = new MyJTable();
+		table = new JTable();
 		table.setOpaque(true);
+		
+		//JPanel for JTable
+		JPanel panel = new JPanel();
 		
 		//Create the menu bar items
 		file = new JMenu("File");
@@ -57,19 +63,27 @@ public class Menu extends JFrame {
 				response = fileChooser.showOpenDialog(null);
 				if(response == JFileChooser.APPROVE_OPTION)
 				{
+					table.setVisible(true);
 					myFile = fileChooser.getSelectedFile();
 					FileHandler test = new FileHandler();
 					List<Student> testStudents = test.FileReadCSV(myFile);
+					//create defaule JTable to add students to
+					dtm = new DefaultTableModel(0, 0);
+					String[] header = {"ID",        						
+							"First Name",
+			                "Last Name",
+			                "Program & Plan",
+			                "Academic Level",
+			                "ASURITE"};
+					dtm.setColumnIdentifiers(header);
+					table.setModel(dtm);
 					for(Student a : testStudents)
-					{
-						System.out.println(a.ID);
-						System.out.println(a.firstN);
-						System.out.println(a.lastN);
-						System.out.println(a.program);
-						System.out.println(a.academicLevel);
-						System.out.println(a.ASURITE);
-						System.out.println(a.time);
+					{	
+						//add each student to JTable
+						dtm.addRow(new Object[] {a.ID, a.firstN, a.lastN, a.program, a.academicLevel, a.ASURITE});
 					}
+					//and set the panel to visible
+					panel.setVisible(true);
 				}
 			}
 		});
@@ -112,6 +126,11 @@ public class Menu extends JFrame {
 						{
 							myFile = fileChooser.getSelectedFile();
 							//This is where we call method to parse file and add to table
+							String columnName = "testicles" ; //monthList + (String)numberList;
+							dtm.addColumn(columnName);
+							
+							
+							
 							//This if statement will be replaced with a true/false if attendance is added
 							if(true)
 							{
@@ -196,7 +215,7 @@ public class Menu extends JFrame {
 		frame.setJMenuBar(menuBar);
 		
 		//Add the JTable to the frame
-		JPanel panel = new JPanel();
+		panel.setVisible(false);
 		panel.add(new JScrollPane(table));
 		frame.add(panel);
 		
