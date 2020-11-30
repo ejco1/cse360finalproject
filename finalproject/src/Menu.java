@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Scanner;
+import java.util.List;
 
 public class Menu extends JFrame {
 	/**
@@ -14,7 +15,7 @@ public class Menu extends JFrame {
 	static JMenuBar menuBar;
 	static JMenu file, about;
 	static MyJTable table;
-	static JMenuItem loadRoster, addAttendance, save, plotData;
+	static JMenuItem loadRoster, addAttendance, save, plotData, aboutItem;
 	Menu()
 	{
 		//Create the frame
@@ -30,32 +31,13 @@ public class Menu extends JFrame {
 		//Create the menu bar items
 		file = new JMenu("File");
 		about = new JMenu("About");
-
-		about.addActionListener(new ActionListener()	{
-			public void actionPerformed(ActionEvent event){
-				String authors = "Ethan Co, Hunter Carmona, Jordan Slater\n";
-				String desc = "This is a program designed to load in a class roster, add in the attendance for specific days and plot attendance data per student.\n";
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				panel.add(new JLabel(authors));
-				panel.add(new JLabel(desc));
-
-				final JDialog d = new JDialog();
-				d.setSize(200, 200);
-				d.setLocationRelativeTo(null);
-				d.add(panel);
-				d.setVisible(true);
-
-
-			}
-		});
-		
+    
 		//Create the menu items
 		loadRoster = new JMenuItem("Load a roster");
 		addAttendance = new JMenuItem("Add attendance");
 		save = new JMenuItem("Save");
 		plotData = new JMenuItem("Plot data");
+		aboutItem = new JMenuItem("About");
 		
 		loadRoster.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
@@ -70,7 +52,18 @@ public class Menu extends JFrame {
 				if(response == JFileChooser.APPROVE_OPTION)
 				{
 					myFile = fileChooser.getSelectedFile();
-					//This is where we call method to parse file and add to table
+					FileHandler test = new FileHandler();
+					List<Student> testStudents = test.FileReadCSV(myFile);
+					for(Student a : testStudents)
+					{
+						System.out.println(a.ID);
+						System.out.println(a.firstN);
+						System.out.println(a.lastN);
+						System.out.println(a.program);
+						System.out.println(a.academicLevel);
+						System.out.println(a.ASURITE);
+						System.out.println(a.time);
+					}
 				}
 			}
 		});
@@ -88,28 +81,67 @@ public class Menu extends JFrame {
 				{
 					myFile = fileChooser.getSelectedFile();
 					//This is where we call method to parse file and add to table
+					//This if statement will be replaced with a true/false if attendance is added
+					if(true)
+					{
+						JPanel attendancePanel = new JPanel();
+						attendancePanel.setLayout(new BoxLayout(attendancePanel, BoxLayout.PAGE_AXIS));
+						JDialog attendanceDialog = new JDialog(frame, "About");
+						JLabel attendanceLabel = new JLabel("Data loaded for " + " users in the roster");
+						attendancePanel.add(attendanceLabel);
+						//If statement for if additional attendees not on roster
+						if(true) 
+						{
+							JLabel additionalLabel = new JLabel(" attional attendee was found:");
+							//this will be a for loop for x users loaded
+							JLabel additionalLabelInfo = new JLabel(", connected for " + " minute");
+							attendancePanel.add(additionalLabel);
+							attendancePanel.add(additionalLabelInfo);
+						}
+						attendancePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+						attendanceDialog.add(attendancePanel);
+						attendanceDialog.setSize(400, 400);
+						attendanceDialog.setVisible(true);
+					}
 				}
 			}
 		});
+		
 		save.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{		
 				//This is where we save the roster	
 			}
 		});
+		
 		plotData.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
 				//This is where we print the graph
+				
 			}
 			
 		});
 		
+		aboutItem.addActionListener(new ActionListener()	{
+			public void actionPerformed(ActionEvent event)
+			{
+				//This is where we open a dialog box 
+				JDialog aboutBox = new JDialog(frame, "About");
+				JLabel aboutTeam = new JLabel("CSE 360 Final Project by Ethan Co, Jordan Slater and Hunter Carmona");
+				aboutBox.add(aboutTeam);
+				aboutBox.setSize(400, 400);
+				aboutBox.setVisible(true);
+			}
+			
+		});
 		//Add menu items to file menu
 		file.add(loadRoster);
 		file.add(addAttendance);
 		file.add(save);
 		file.add(plotData);
+		
+		about.add(aboutItem);
 		
 		//Add menu's to menu bar
 		menuBar.add(file);
