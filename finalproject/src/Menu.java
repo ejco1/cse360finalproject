@@ -181,7 +181,6 @@ public class Menu extends JFrame {
 				
             	example.setSize(800,400);
             	example.setLocationRelativeTo(null);
-            	example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             	example.setVisible(true);
 			}
 			
@@ -195,6 +194,7 @@ public class Menu extends JFrame {
 				JLabel aboutTeam = new JLabel("CSE 360 Final Project by Ethan Co, Jordan Slater and Hunter Carmona");
 				aboutBox.add(aboutTeam);
 				aboutBox.setSize(400, 400);
+				aboutBox.setLocationRelativeTo(null);
 				aboutBox.setVisible(true);
 			}
 			
