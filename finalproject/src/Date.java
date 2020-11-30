@@ -9,34 +9,34 @@ public class Date {
     ArrayList<Student> arrStudents;
     String date;
 
-/*
-Constructor for the class, setting the size of the array,
-We are given that the Date from DatePicker will be given in the form of a special String.
-*/
-public Date(String d){
-    arrStudents = new ArrayList<Student>();
-    date = d;
-}
-/*
-Array Getter.
-*/
-public ArrayList<Student> getStudents(){
-    return arrStudents;
-}
-/*
-Date Getter.
-*/
-public String getDate(){
-    return date;
-}
-/*
-Student Adder, to be used manually for testing purposes & through a bufferedReader for the Table purposes.
-*/
-public void addStudent(Student s, double t){
-    Student toBeAdded = s;
-    double time = Math.round(t/75) * 100;
-
-    toBeAdded.setTime(time);
-    arrStudents.add(toBeAdded);
-}
+	/*
+	Constructor for the class, setting the size of the array,
+	We are given that the Date from DatePicker will be given in the form of a special String.
+	*/
+	public Date(String d){
+	    arrStudents = new ArrayList<Student>();
+	    date = d;
+	}
+	/*
+	Array Getter.
+	*/
+	public ArrayList<Student> getStudents(){
+	    return arrStudents;
+	}
+	/*
+	Date Getter.
+	*/
+	public String getDate(){
+	    return date;
+	}
+	/*
+	Student Adder, to be used manually for testing purposes & through a bufferedReader for the Table purposes.
+	*/
+	public void addStudent(Student s, double t){
+	    Student toBeAdded = s;
+	    double time = Math.round(t/75) * 100;
+	
+	    toBeAdded.setTime(time);
+	    arrStudents.add(toBeAdded);
+	}
 }

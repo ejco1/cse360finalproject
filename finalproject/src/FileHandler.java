@@ -31,6 +31,32 @@ public class FileHandler
 		}
 		return students;
 	}
+	public static Date FileReadCSVDate(File myFile, String d)
+	{
+		Date date1 = new Date(d);
+		File newFile = myFile;
+		String line = "";
+		String delimeter = ",";
+		try(BufferedReader br = new BufferedReader(new FileReader(newFile)))
+		{
+			line = br.readLine();
+			while(line != null)
+			{
+				String[] dateElements = line.split(delimeter);
+				double stuTime = Double.parseDouble(dateElements[1]);
+				Student temp = new Student();
+				temp.ASURITE = dateElements[0];
+				date1.addStudent(temp, stuTime);
+				//Dates.add(newDate);
+				line = br.readLine();
+			}
+		}
+		catch(IOException test) 
+		{
+			System.out.println("idk");
+		}
+		return date1;
+	}
 	public static Student createStudent(String[] elements)
 	{
 		String ID = elements[0];
@@ -42,4 +68,14 @@ public class FileHandler
 		Student tempStudent = new Student(ID, firstName, lastName, programAndPlan, academicLevel, asuRite);
 		return tempStudent;
 	}
+	
+	/*
+	public static Date createDate(String[] elements)
+	{
+		String ASURITE = elements[0];
+		String time = elements[1];
+		//Date tempDate = addStudent(ASURITE, time);
+		return tempDate;
+	}
+	*/
 }
