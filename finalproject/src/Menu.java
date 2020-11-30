@@ -64,6 +64,7 @@ public class Menu extends JFrame {
 				if(response == JFileChooser.APPROVE_OPTION)
 				{
 					table.setVisible(true);
+					
 					myFile = fileChooser.getSelectedFile();
 					FileHandler test = new FileHandler();
 					List<Student> testStudents = test.FileReadCSV(myFile);
@@ -93,7 +94,7 @@ public class Menu extends JFrame {
 				JPanel attendanceOptions = new JPanel();
 				attendanceOptions.setLayout(new GridLayout(0, 2, 5, 5));
 				JDialog attendanceBox = new JDialog(frame, "Choose an attendance file and insert the date");
-				String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+				String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 				JComboBox monthList = new JComboBox(months);
 				String[] numbers = new String[31];
 				for(int i = 0; i < 31; i++)
@@ -116,7 +117,7 @@ public class Menu extends JFrame {
 				fileButton.addActionListener(new ActionListener()	{
 					public void actionPerformed(ActionEvent event)
 					{
-						File myFile;
+						File myFile2;
 						Scanner fileChosen;
 						int response;
 						JFileChooser fileChooser = new JFileChooser("");
@@ -124,12 +125,21 @@ public class Menu extends JFrame {
 						response = fileChooser.showOpenDialog(null);
 						if(response == JFileChooser.APPROVE_OPTION)
 						{
-							myFile = fileChooser.getSelectedFile();
-							//This is where we call method to parse file and add to table
-							String columnName = "testicles" ; //monthList + (String)numberList;
+							//add date column to JTable
+							String columnName = String.valueOf(monthList.getSelectedItem()) + " " + String.valueOf(numberList.getSelectedItem());
 							dtm.addColumn(columnName);
 							
+							//This is where we call method to parse file and add to table
+							myFile2 = fileChooser.getSelectedFile();
+							FileHandler test = new FileHandler();
+							Date testDate = test.FileReadCSVDate(myFile2, columnName);
+							days.add(testDate);
 							
+							/*for(Date a : testDates)
+							{	
+								//add each date to JTable
+								dtm.addColumn(new Object[] {   });
+							}*/
 							
 							//This if statement will be replaced with a true/false if attendance is added
 							if(true)
@@ -181,7 +191,7 @@ public class Menu extends JFrame {
 				
             	example.setSize(800,400);
             	example.setLocationRelativeTo(null);
-            	example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            	//example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             	example.setVisible(true);
 			}
 			
@@ -195,6 +205,7 @@ public class Menu extends JFrame {
 				JLabel aboutTeam = new JLabel("CSE 360 Final Project by Ethan Co, Jordan Slater and Hunter Carmona");
 				aboutBox.add(aboutTeam);
 				aboutBox.setSize(400, 400);
+				aboutBox.setLocationRelativeTo(null);
 				aboutBox.setVisible(true);
 			}
 			
