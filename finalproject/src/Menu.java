@@ -76,40 +76,67 @@ public class Menu extends JFrame {
 		addAttendance.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
-				//This is where we add attendance
-				File myFile;
-				Scanner fileChosen;
-				int response;
-				JFileChooser fileChooser = new JFileChooser("");
-				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-				response = fileChooser.showOpenDialog(null);
-				if(response == JFileChooser.APPROVE_OPTION)
+				JPanel attendanceOptions = new JPanel();
+				attendanceOptions.setLayout(new GridLayout(0, 2, 5, 5));
+				JDialog attendanceBox = new JDialog(frame, "Choose an attendance file and insert the date");
+				String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+				JComboBox monthList = new JComboBox(months);
+				String[] numbers = new String[31];
+				for(int i = 0; i < 31; i++)
 				{
-					myFile = fileChooser.getSelectedFile();
-					//This is where we call method to parse file and add to table
-					//This if statement will be replaced with a true/false if attendance is added
-					if(true)
-					{
-						JPanel attendancePanel = new JPanel();
-						attendancePanel.setLayout(new BoxLayout(attendancePanel, BoxLayout.PAGE_AXIS));
-						JDialog attendanceDialog = new JDialog(frame, "About");
-						JLabel attendanceLabel = new JLabel("Data loaded for " + " users in the roster");
-						attendancePanel.add(attendanceLabel);
-						//If statement for if additional attendees not on roster
-						if(true) 
-						{
-							JLabel additionalLabel = new JLabel(" attional attendee was found:");
-							//this will be a for loop for x users loaded
-							JLabel additionalLabelInfo = new JLabel(", connected for " + " minute");
-							attendancePanel.add(additionalLabel);
-							attendancePanel.add(additionalLabelInfo);
-						}
-						attendancePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-						attendanceDialog.add(attendancePanel);
-						attendanceDialog.setSize(400, 400);
-						attendanceDialog.setVisible(true);
-					}
+					numbers[i] = String.valueOf(i+1);
 				}
+				JComboBox numberList = new JComboBox(numbers);
+				JButton fileButton = new JButton();
+				fileButton.setText("Select a file");
+				
+				attendanceOptions.add(monthList);
+				attendanceOptions.add(numberList);
+				attendanceOptions.add(fileButton);
+				
+				attendanceBox.add(attendanceOptions);
+				attendanceBox.setSize(500,100);
+				attendanceBox.setLocationRelativeTo(null);
+				attendanceBox.setVisible(true);
+				//This is where we add attendance
+				fileButton.addActionListener(new ActionListener()	{
+					public void actionPerformed(ActionEvent event)
+					{
+						File myFile;
+						Scanner fileChosen;
+						int response;
+						JFileChooser fileChooser = new JFileChooser("");
+						fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+						response = fileChooser.showOpenDialog(null);
+						if(response == JFileChooser.APPROVE_OPTION)
+						{
+							myFile = fileChooser.getSelectedFile();
+							//This is where we call method to parse file and add to table
+							//This if statement will be replaced with a true/false if attendance is added
+							if(true)
+							{
+								JPanel attendanceInfoPanel = new JPanel();
+								attendanceInfoPanel.setLayout(new BoxLayout(attendanceInfoPanel, BoxLayout.PAGE_AXIS));
+								JDialog attendanceDialog = new JDialog(frame, "About");
+								JLabel attendanceLabel = new JLabel("Data loaded for " + " users in the roster");
+								attendanceInfoPanel.add(attendanceLabel);
+								//If statement for if additional attendees not on roster
+								if(true) 
+								{
+									JLabel additionalLabel = new JLabel(" attional attendee was found:");
+									//this will be a for loop for x users loaded
+									JLabel additionalLabelInfo = new JLabel(", connected for " + " minute");
+									attendanceInfoPanel.add(additionalLabel);
+									attendanceInfoPanel.add(additionalLabelInfo);
+								}
+								attendanceInfoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+								attendanceDialog.add(attendanceInfoPanel);
+								attendanceDialog.setSize(400, 400);
+								attendanceDialog.setVisible(true);
+							}
+						}
+					}
+				});
 			}
 		});
 		
@@ -174,6 +201,7 @@ public class Menu extends JFrame {
 		frame.add(panel);
 		
 		frame.setSize(1000, 1000);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 	public static void main(String[] args) 
