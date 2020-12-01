@@ -37,7 +37,7 @@ public class Date {
 	*/
 	public void addStudent(Student s, double t){
 	    Student toBeAdded = s;
-	    double time = Math.round(t/75) * 100;
+	    double time = t;
         if(findStudent(s) < 0){
 	    toBeAdded.setTime(time);
         arrStudents.add(toBeAdded);

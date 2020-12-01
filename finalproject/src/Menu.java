@@ -50,6 +50,7 @@ public class Menu extends JFrame {
 		//Data Items
 		ArrayList<Date> days = new ArrayList<Date>();
 		ArrayList<Student> students = new ArrayList<Student>();
+		//String to store fileName to access in addAttendance
 		
 		loadRoster.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
@@ -67,7 +68,8 @@ public class Menu extends JFrame {
 					
 					myFile = fileChooser.getSelectedFile();
 					FileHandler test = new FileHandler();
-					ArrayList<Student> testStudents = test.FileReadCSV(myFile);
+					ArrayList<Student> testStudents = new ArrayList<Student>();
+					testStudents = test.FileReadCSV(myFile);
 					//create defaule JTable to add students to
 					dtm = new DefaultTableModel(0, 0);
 					String[] header = {"ID",        						
@@ -80,6 +82,8 @@ public class Menu extends JFrame {
 					table.setModel(dtm);
 					for(Student a : testStudents)
 					{	
+						//copy to students
+						students.add(a);
 						//add each student to JTable
 						dtm.addRow(new Object[] {a.ID, a.firstN, a.lastN, a.program, a.academicLevel, a.ASURITE});
 					}
@@ -134,20 +138,64 @@ public class Menu extends JFrame {
 							
 							FileHandler test2 = new FileHandler();
 							Date testDate = test2.FileReadCSVDate(myFile2, columnName);
-						
+							Date realStuds = new Date(columnName);
+							ArrayList<Student> newStuds = new ArrayList<Student>();
 							
-					//for testing purposes
-							System.out.println(testDate.getDate());
+							//new student checker
+							int newStudNum = 0;
+							int sendhelp = 0;
+							
+							//instantiations
+							int index = -1;
+							int indexYeet;
+							boolean found = false;
+							double timeTemp;
+							
+							//loop to find new Students
 							for(Student a : testDate.getStudents())
-							{
-								int i =0;
-								System.out.println(a.ASURITE);
-								//dtm.addRow(testDate.getStudents(i).getFirstN(), testDate.getStudents(i).getASURITE());
-								i++;
-
+							{								
+								for(Student b : students)
+								{
+						            if(b.ASURITE.compareTo(a.ASURITE) == 0)
+						            {
+						            	found = true;
+						                indexYeet = index;
+						            }
+						            index++;
+						        }
+								if(found == true)
+								{
+									realStuds.addStudent(a, a.time);
+								}
+								else
+								{
+									newStuds.add(a);
+									newStudNum++;
+								}
+								found = false;
 							}
 
-							days.add(testDate);
+							days.add(realStuds);
+							
+							dtm.getDataVector().removeAllElements();
+						    revalidate();
+						    
+						    //print time for students
+						    for(Student a : students)
+							{
+								double time = 0;
+								ArrayList<Student> temp = testDate.getStudents();
+								for(Student i : temp)
+								{
+									if(i.ASURITE.compareTo(a.ASURITE) == 0)
+									{
+										time = i.time;
+									}
+								}
+								
+								//add each student to JTable
+								dtm.addRow(new Object[] {a.ID, a.firstN, a.lastN, a.program, a.academicLevel, a.ASURITE, time});
+							}			
 							
 							//This if statement will be replaced with a true/false if attendance is added
 							//if the date's student arraylist is empty, then
@@ -155,25 +203,27 @@ public class Menu extends JFrame {
 							{
 								JPanel attendanceInfoPanel = new JPanel();
 								attendanceInfoPanel.setLayout(new BoxLayout(attendanceInfoPanel, BoxLayout.PAGE_AXIS));
-								JDialog attendanceDialog = new JDialog(frame, "About");
+								JDialog attendanceDialog = new JDialog(frame, "Pick A Date");
 								
 								
 								//getting size for the label below
 								int numOfLoaded = 0;
-								numOfLoaded = testDate.getStudents().size();
-								
-								//new student checker
-								int newStuds = 0;
+								numOfLoaded = realStuds.getStudents().size();
 								
 								JLabel attendanceLabel = new JLabel("Data loaded for " + numOfLoaded + " users in the roster");
 								attendanceInfoPanel.add(attendanceLabel);
 								//If statement for if additional attendees not on roster
 								if(true) 
 								{
-									JLabel additionalLabel = new JLabel(newStuds + " additional attendee was found:");
+									String nonStuds = "";
+									JLabel additionalLabel = new JLabel(newStudNum + " additional attendee was found:");
 									//this will be a for loop for x users loaded
+									for(Student a : newStuds)
+									{
+										nonStuds = nonStuds + a.ASURITE + ", connected for " + a.time + " minutes<br/>";
+									}
 									//while(testDate)
-									JLabel additionalLabelInfo = new JLabel(", connected for " + " minute");
+									JLabel additionalLabelInfo = new JLabel("<html>" + nonStuds + "</html>");
 									attendanceInfoPanel.add(additionalLabel);
 									attendanceInfoPanel.add(additionalLabelInfo);
 								}

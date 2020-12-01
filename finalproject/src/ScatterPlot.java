@@ -46,25 +46,25 @@ public class ScatterPlot extends JFrame {
         for(Date day : d){
         XYSeries specificDate = new XYSeries(day.getDate());
             for(Student yes : day.getStudents()){
-                if(yes.getTime() == 0)
+                if(Math.round((yes.getTime()/75) * 100) == 0)
                     zeroP++;
-                else if(yes.getTime() == 10)
+                else if(Math.round((yes.getTime()/75) * 100) == 10)
                     tenP++;
-                else if(yes.getTime() == 20)
+                else if(Math.round((yes.getTime()/75) * 100) == 20)
                     twentyP++;
-                else if(yes.getTime() == 30)
+                else if(Math.round((yes.getTime()/75) * 100) == 30)
                     thirtyP++;
-                else if(yes.getTime() == 40)
+                else if(Math.round((yes.getTime()/75) * 100) == 40)
                     fortyP++;
-                else if(yes.getTime() == 50)
+                else if(Math.round((yes.getTime()/75) * 100) == 50)
                     fiftyP++;
-                else if(yes.getTime() == 60)
+                else if(Math.round((yes.getTime()/75) * 100) == 60)
                     sixtyP++;
-                else if(yes.getTime() == 70)
+                else if(Math.round((yes.getTime()/75) * 100) == 70)
                     seventyP++;
-                else if(yes.getTime() == 80)
+                else if(Math.round((yes.getTime()/75) * 100) == 80)
                     eightyP++;
-                else if(yes.getTime() == 90)
+                else if(Math.round((yes.getTime()/75) * 100) == 90)
                     ninetyP++;
                 else
                     oneP++;

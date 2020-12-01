@@ -37,7 +37,6 @@ public class FileHandler
 	}
 	public static Date FileReadCSVDate(File myFile, String d)
 	{
-		System.out.println("hi");
 		Date date1 = new Date(d);
 		File newFile = myFile;
 		String line = "";
@@ -45,20 +44,17 @@ public class FileHandler
 		try(BufferedReader br = new BufferedReader(new FileReader(newFile)))
 		{
 			line = br.readLine();
+			String shit = line.substring(3);
+			shit.trim();
+			
 			while(line != null)
 			{
-				System.out.println("hi 2");
-
 				String[] dateElements = line.split(delimeter);
 				double stuTime = Double.parseDouble(dateElements[1]);
 				Student temp = new Student();
 				temp.ASURITE = dateElements[0];
 				date1.addStudent(temp, stuTime);
 				line = br.readLine();
-				
-				//tests
-				System.out.println(dateElements[0]);
-				System.out.println(temp.getASURITE());
 			}
 		}
 		catch(IOException e) 
