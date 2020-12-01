@@ -40,6 +40,11 @@ public class FileHandler
 		}
 		return students;
 	}
+	/*
+	 * FileReadCSVDate will read data from a file and create a Date object from it.
+	 * @param myFile is the file to be read.
+	 * @return date1 is the Date we are returning.
+	 */
 	public static Date FileReadCSVDate(File myFile, String d)
 	{
 		Date date1 = new Date(d);
@@ -69,8 +74,9 @@ public class FileHandler
 		return date1;
 	}
 	/*
-	 * This method will return a Student given an array of Strings
-	 * @param elements is the string array of Student elements
+	 * This method will return a Student given an array of Strings.
+	 * @param elements is the string array of Student elements.
+	 * @return tempStudent is the Student we are returning.
 	 */
 	public static Student createStudent(String[] elements)
 	{
