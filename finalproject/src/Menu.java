@@ -46,7 +46,7 @@ public class Menu extends JFrame {
 		save = new JMenuItem("Save");
 		plotData = new JMenuItem("Plot data");
 		aboutItem = new JMenuItem("About");
-
+		
 		//Data Items
 		ArrayList<Date> days = new ArrayList<Date>();
 		ArrayList<Student> students = new ArrayList<Student>();
@@ -67,7 +67,7 @@ public class Menu extends JFrame {
 					
 					myFile = fileChooser.getSelectedFile();
 					FileHandler test = new FileHandler();
-					List<Student> testStudents = test.FileReadCSV(myFile);
+					ArrayList<Student> testStudents = test.FileReadCSV(myFile);
 					//create defaule JTable to add students to
 					dtm = new DefaultTableModel(0, 0);
 					String[] header = {"ID",        						
@@ -135,32 +135,33 @@ public class Menu extends JFrame {
 							Date testDate = test.FileReadCSVDate(myFile2, columnName);
 							days.add(testDate);
 							
-							
-							/*for(Date a : testDates)
-							{	
-								//add each date to JTable
-								dtm.addColumn(new Object[] {   });
-							}*/
-							
 							//This if statement will be replaced with a true/false if attendance is added
-							if(true)
+							if(!testDate.getStudents().isEmpty())
 							{
 								JPanel attendanceInfoPanel = new JPanel();
 								attendanceInfoPanel.setLayout(new BoxLayout(attendanceInfoPanel, BoxLayout.PAGE_AXIS));
 								JDialog attendanceDialog = new JDialog(frame, "About");
-								JLabel attendanceLabel = new JLabel("Data loaded for " + " users in the roster");
+								
+								
+								//getting size for the label below
+								int numOfLoaded = 0;
+								numOfLoaded = testDate.getStudents().size();
+								
+								JLabel attendanceLabel = new JLabel("Data loaded for " + numOfLoaded + " users in the roster");
 								attendanceInfoPanel.add(attendanceLabel);
 								//If statement for if additional attendees not on roster
 								if(true) 
 								{
 									JLabel additionalLabel = new JLabel(" attional attendee was found:");
 									//this will be a for loop for x users loaded
+									//while(testDate)
 									JLabel additionalLabelInfo = new JLabel(", connected for " + " minute");
 									attendanceInfoPanel.add(additionalLabel);
 									attendanceInfoPanel.add(additionalLabelInfo);
 								}
 								attendanceInfoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 								attendanceDialog.add(attendanceInfoPanel);
+								attendanceDialog.setLocationRelativeTo(null);
 								attendanceDialog.setSize(400, 400);
 								attendanceDialog.setVisible(true);
 							}
@@ -173,7 +174,19 @@ public class Menu extends JFrame {
 		save.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{		
-				//This is where we save the roster	
+				//This is where we save the roster
+				int response;
+				File myFile;
+				JFileChooser fileChooser = new JFileChooser("");
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				response = fileChooser.showSaveDialog(null);
+				if(response == JFileChooser.APPROVE_OPTION)
+				{
+					table.setVisible(true);
+					myFile = fileChooser.getSelectedFile();
+					FileHandler test = new FileHandler();
+					test.FileSaveCSV(dtm, myFile);
+				}
 			}
 		});
 		/*

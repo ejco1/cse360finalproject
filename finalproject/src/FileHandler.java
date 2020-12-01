@@ -1,16 +1,20 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 public class FileHandler 
 {
-	public static List<Student> FileReadCSV(File myFile)
+	public static ArrayList<Student> FileReadCSV(File myFile)
 	{
-		List<Student> students = new ArrayList<>();
+		ArrayList<Student> students = new ArrayList<>();
 		File newFile = myFile;
 		String line = "";
 		String delimeter = ",";
@@ -25,9 +29,9 @@ public class FileHandler
 				line = br.readLine();
 			}
 		}
-		catch(IOException test) 
+		catch(IOException e) 
 		{
-			System.out.println("idk");
+			e.printStackTrace();
 		}
 		return students;
 	}
@@ -47,13 +51,12 @@ public class FileHandler
 				Student temp = new Student();
 				temp.ASURITE = dateElements[0];
 				date1.addStudent(temp, stuTime);
-				//Dates.add(newDate);
 				line = br.readLine();
 			}
 		}
-		catch(IOException test) 
+		catch(IOException e) 
 		{
-			System.out.println("idk");
+			e.printStackTrace();
 		}
 		return date1;
 	}
@@ -68,7 +71,32 @@ public class FileHandler
 		Student tempStudent = new Student(ID, firstName, lastName, programAndPlan, academicLevel, asuRite);
 		return tempStudent;
 	}
-	
+	public static void FileSaveCSV(DefaultTableModel test, File myFile)
+	{
+		try 
+		{
+			FileWriter writer = new FileWriter(myFile);
+			for(int i = 0; i < test.getColumnCount(); i++)
+			{
+				writer.write(test.getColumnName(i) + ",");
+			}
+			writer.write("\n");
+			for(int i = 0; i < test.getRowCount(); i++)
+			{
+				for(int j = 0; j < test.getColumnCount(); j++)
+				{
+					writer.write(test.getValueAt(i, j) + ",");
+				}
+				writer.write("\n");
+			}
+			writer.close();
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	/*
 	public static Date createDate(String[] elements)
 	{
