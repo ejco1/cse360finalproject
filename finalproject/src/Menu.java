@@ -135,25 +135,27 @@ public class Menu extends JFrame {
 							Date testDate = test.FileReadCSVDate(myFile2, columnName);
 							days.add(testDate);
 
-							/*for(Date a : testDates)
-							{	
-								//add each date to JTable
-								dtm.addColumn(new Object[] {   });
-							}*/
 							
 							//This if statement will be replaced with a true/false if attendance is added
-							if(true)
+							if(!testDate.getStudents().isEmpty())
 							{
 								JPanel attendanceInfoPanel = new JPanel();
 								attendanceInfoPanel.setLayout(new BoxLayout(attendanceInfoPanel, BoxLayout.PAGE_AXIS));
 								JDialog attendanceDialog = new JDialog(frame, "About");
-								JLabel attendanceLabel = new JLabel("Data loaded for " + " users in the roster");
+								
+								
+								//getting size for the label below
+								int numOfLoaded = 0;
+								numOfLoaded = testDate.getStudents().size();
+								
+								JLabel attendanceLabel = new JLabel("Data loaded for " + numOfLoaded + " users in the roster");
 								attendanceInfoPanel.add(attendanceLabel);
 								//If statement for if additional attendees not on roster
 								if(true) 
 								{
 									JLabel additionalLabel = new JLabel(" attional attendee was found:");
 									//this will be a for loop for x users loaded
+									//while(testDate)
 									JLabel additionalLabelInfo = new JLabel(", connected for " + " minute");
 									attendanceInfoPanel.add(additionalLabel);
 									attendanceInfoPanel.add(additionalLabelInfo);

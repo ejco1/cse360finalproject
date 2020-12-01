@@ -51,7 +51,6 @@ public class FileHandler
 				Student temp = new Student();
 				temp.ASURITE = dateElements[0];
 				date1.addStudent(temp, stuTime);
-				//Dates.add(newDate);
 				line = br.readLine();
 			}
 		}
