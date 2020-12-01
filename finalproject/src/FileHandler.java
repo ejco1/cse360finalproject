@@ -12,9 +12,9 @@ import javax.swing.table.TableModel;
 
 public class FileHandler 
 {
-	public static List<Student> FileReadCSV(File myFile)
+	public static ArrayList<Student> FileReadCSV(File myFile)
 	{
-		List<Student> students = new ArrayList<>();
+		ArrayList<Student> students = new ArrayList<>();
 		File newFile = myFile;
 		String line = "";
 		String delimeter = ",";
