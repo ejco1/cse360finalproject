@@ -135,6 +135,7 @@ public class Menu extends JFrame {
 							Date testDate = test.FileReadCSVDate(myFile2, columnName);
 							days.add(testDate);
 							
+							
 							/*for(Date a : testDates)
 							{	
 								//add each date to JTable
