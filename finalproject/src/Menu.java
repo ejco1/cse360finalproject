@@ -67,7 +67,7 @@ public class Menu extends JFrame {
 					
 					myFile = fileChooser.getSelectedFile();
 					FileHandler test = new FileHandler();
-					List<Student> testStudents = test.FileReadCSV(myFile);
+					ArrayList<Student> testStudents = test.FileReadCSV(myFile);
 					//create defaule JTable to add students to
 					dtm = new DefaultTableModel(0, 0);
 					String[] header = {"ID",        						
