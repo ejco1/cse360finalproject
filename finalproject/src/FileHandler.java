@@ -1,17 +1,22 @@
+/*
+Authors: Hunter Carmona, Ethan Co, Jordan Slater
+Description: This is the file handler, which will handle reading, saving and writing to csv files 
+*/
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class FileHandler 
 {
+	/*
+	 * This method reads from a csv file and returns a student list which is used for the JTable
+	 * @param myFile	file to be read from
+	 * @return students	ArrayList of Student objects
+	 */
 	public static ArrayList<Student> FileReadCSV(File myFile)
 	{
 		ArrayList<Student> students = new ArrayList<>();
@@ -74,6 +79,11 @@ public class FileHandler
 		Student tempStudent = new Student(ID, firstName, lastName, programAndPlan, academicLevel, asuRite);
 		return tempStudent;
 	}
+	/*
+	 * This method saves the current JTable to a csv file
+	 * @param test	the TableModel displayed on the gui
+	 * @param myFile the file to be saved to 
+	 */
 	public static void FileSaveCSV(DefaultTableModel test, File myFile)
 	{
 		try 

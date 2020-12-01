@@ -1,13 +1,13 @@
+/*
+Authors: Hunter Carmona, Ethan Co, Jordan Slater
+Description: This is the menu, which is the gui for the program. Also contains the main function
+*/
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Scanner;
-import java.util.List;
-
 import java.util.ArrayList;
 
 public class Menu extends JFrame {
@@ -15,12 +15,16 @@ public class Menu extends JFrame {
 	 * Default SerialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
+	//Declare static variables for the gui
 	static JFrame frame;
 	static JMenuBar menuBar;
 	static JMenu file, about;
 	static JTable table;
 	static DefaultTableModel dtm;
 	static JMenuItem loadRoster, addAttendance, save, plotData, aboutItem;
+	/*
+	 * Constructor for Menu, creates the gui and implements its action listeners
+	 */
 	Menu()
 	{
 		//Create the frame
@@ -50,14 +54,12 @@ public class Menu extends JFrame {
 		//Data Items
 		ArrayList<Date> days = new ArrayList<Date>();
 		ArrayList<Student> students = new ArrayList<Student>();
-		//String to store fileName to access in addAttendance
-		
+		//Action listener for the load roster 
 		loadRoster.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
 				//This is where we load roster
 				File myFile;
-				Scanner fileChosen;
 				int response;
 				JFileChooser fileChooser = new JFileChooser("");
 				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -70,7 +72,7 @@ public class Menu extends JFrame {
 					FileHandler test = new FileHandler();
 					ArrayList<Student> testStudents = new ArrayList<Student>();
 					testStudents = test.FileReadCSV(myFile);
-					//create defaule JTable to add students to
+					//create default JTable to add students to
 					dtm = new DefaultTableModel(0, 0);
 					String[] header = {"ID",        						
 							"First Name",
@@ -92,6 +94,7 @@ public class Menu extends JFrame {
 				}
 			}
 		});
+		//Action listener for the add attendance function
 		addAttendance.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
@@ -122,7 +125,6 @@ public class Menu extends JFrame {
 					public void actionPerformed(ActionEvent event)
 					{
 						File myFile2;
-						Scanner fileChosen;
 						int response;
 						JFileChooser fileChooser2 = new JFileChooser("");
 						fileChooser2.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -238,7 +240,7 @@ public class Menu extends JFrame {
 				});
 			}
 		});
-		
+		//Action listener for the save button
 		save.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{		
@@ -257,9 +259,7 @@ public class Menu extends JFrame {
 				}
 			}
 		});
-		/*
-		The constructor for ScatterPlot holds the Pane to be created, just fix up the size of the window here.
-		*/
+		//Action listener for plot data button
 		plotData.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
@@ -277,7 +277,7 @@ public class Menu extends JFrame {
 			}
 			
 		});
-		
+		//Action listener for about button
 		aboutItem.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
@@ -289,7 +289,6 @@ public class Menu extends JFrame {
 				aboutBox.setLocationRelativeTo(null);
 				aboutBox.setVisible(true);
 			}
-			
 		});
 		//Add menu items to file menu
 		file.add(loadRoster);
