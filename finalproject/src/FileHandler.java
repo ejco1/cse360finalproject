@@ -68,6 +68,10 @@ public class FileHandler
 		}
 		return date1;
 	}
+	/*
+	 * This method will return a Student given an array of Strings
+	 * @param elements is the string array of Student elements
+	 */
 	public static Student createStudent(String[] elements)
 	{
 		String ID = elements[0];
