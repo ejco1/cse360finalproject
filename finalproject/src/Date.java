@@ -1,10 +1,10 @@
+/*
+Authors: Hunter Carmona, Ethan Co, Jordan Slater
+Description: This is the Date Object, where the name of the Date is held, and an arrayList of Students.
+*/
 import java.lang.String;
 import java.util.ArrayList;
-/*
-Date Object for the last columns of the JTable. This may also be used for the JTable for the roster.
-Date objects should be held in a Date Array to be put in the last columns of the table.
---WARNING: This does not separate students not in the roster. Will have to be done in the MyActionListener.java file.
-*/
+
 public class Date {
     ArrayList<Student> arrStudents;
     String date;
@@ -22,7 +22,10 @@ public class Date {
 	*/
 	public ArrayList<Student> getStudents(){
 	    return arrStudents;
-	}
+    }
+    /*
+    Array Index Getter.
+    */
 	public Student getStudents(int i){
 	    return arrStudents.get(i);
 	}
@@ -33,7 +36,9 @@ public class Date {
 	    return date;
 	}
 	/*
-	Student Adder, to be used manually for testing purposes & through a bufferedReader for the Table purposes.
+    Student Adder, takes parameters of student, and time.
+    This copies from the parameter so the parameter will not be changed, and looks for the student before adding it.
+    If the student is found, it adds the time together, else it creates a new Student Object.
 	*/
 	public void addStudent(Student s, double t){
 	    Student toBeAdded = s;
@@ -45,6 +50,10 @@ public class Date {
             arrStudents.get(findStudent(s)).time = arrStudents.get(findStudent(s)).time + time;
         }
     }
+    /*
+    Student Finder, returns the index of where the Student was found, if the Student was not found then
+    it will return -1.
+    */
     public int findStudent(Student s){
         int index = 0;
         for(Student yes : arrStudents){

@@ -1,24 +1,22 @@
 import java.awt.Color;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.XYDataset;  
+import org.jfree.chart.plot.XYPlot; 
 import org.jfree.data.xy.XYSeries;  
 import org.jfree.data.xy.XYSeriesCollection;
 
 import java.util.ArrayList;
 /*
-ScatterPlot object
+Authors: Hunter Carmona, Ethan Co, Jordan Slater
+Description: This is the Scatter Plot, every time the method is called, it adds a new series to its dataset and displays all of the current points.
 */
 public class ScatterPlot extends JFrame {
     private static final long serialVersionUID = 6294689542092367723L;
     XYSeriesCollection dataset;
-    /* Class Constructor
+    /* Class Constructor, it's already predetermined what the Scatter Plot will be about.
     */
     public ScatterPlot(String title) {
         super(title);
@@ -38,7 +36,8 @@ public class ScatterPlot extends JFrame {
         setContentPane(panel);
     }
     /*
-    This iterates through every day to find the number of students at each percentage
+    This iterates through every day to find the number of students at each percentage, it is divided in percentages of 10 and is rounded to the nearest 10.
+    Essentially, it'll consistently have 10 data points on the Scatter Plot.
     */
     public void addDataset(ArrayList<Date> d){
         int zeroP, tenP, twentyP, thirtyP, fortyP, fiftyP, sixtyP, seventyP, eightyP, ninetyP, oneP;
@@ -77,15 +76,4 @@ public class ScatterPlot extends JFrame {
             zeroP = tenP = twentyP = thirtyP = fortyP = fiftyP = sixtyP = seventyP = eightyP = ninetyP = oneP = 0;
         }
     }
-
-    /*public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            ScatterPlot example = new ScatterPlot("I don't know what this is yet");
-            example.setSize(800,400);
-            example.setLocationRelativeTo(null);
-            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            example.setVisible(true);
-        });
-    }
-    */
 }
