@@ -1,5 +1,8 @@
+/*
+Authors: Hunter Carmona, Ethan Co, Jordan Slater
+Description: This is the Student Object, where it holds all of the information of the Students.
+*/
 import java.lang.String;
-
 public class Student{
     String ID;
     String firstN;
@@ -9,6 +12,9 @@ public class Student{
     String ASURITE;
     double time;
 
+/*
+Class Constructors, one without parameters and the other with.
+*/
     public Student(){
     ID = "";
     firstN = "";
@@ -27,6 +33,9 @@ public class Student{
         ASURITE = asuRite;
         time = 0;
     }
+    /*
+    Getters and Setters for each Variable.
+    */
     public void setTime(double t){
         time = t;
     }
