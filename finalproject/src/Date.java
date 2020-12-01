@@ -23,6 +23,9 @@ public class Date {
 	public ArrayList<Student> getStudents(){
 	    return arrStudents;
 	}
+	public Student getStudents(int i){
+	    return arrStudents.get(i);
+	}
 	/*
 	Date Getter.
 	*/

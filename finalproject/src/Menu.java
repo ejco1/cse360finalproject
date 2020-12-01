@@ -67,7 +67,7 @@ public class Menu extends JFrame {
 					
 					myFile = fileChooser.getSelectedFile();
 					FileHandler test = new FileHandler();
-					List<Student> testStudents = test.FileReadCSV(myFile);
+					ArrayList<Student> testStudents = test.FileReadCSV(myFile);
 					//create defaule JTable to add students to
 					dtm = new DefaultTableModel(0, 0);
 					String[] header = {"ID",        						
@@ -120,9 +120,9 @@ public class Menu extends JFrame {
 						File myFile2;
 						Scanner fileChosen;
 						int response;
-						JFileChooser fileChooser = new JFileChooser("");
-						fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-						response = fileChooser.showOpenDialog(null);
+						JFileChooser fileChooser2 = new JFileChooser("");
+						fileChooser2.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+						response = fileChooser2.showOpenDialog(null);
 						if(response == JFileChooser.APPROVE_OPTION)
 						{
 							//add date column to JTable
@@ -130,29 +130,49 @@ public class Menu extends JFrame {
 							dtm.addColumn(columnName);
 							
 							//This is where we call method to parse file and add to table
-							myFile2 = fileChooser.getSelectedFile();
-							FileHandler test = new FileHandler();
-							Date testDate = test.FileReadCSVDate(myFile2, columnName);
+							myFile2 = fileChooser2.getSelectedFile();
+							
+							FileHandler test2 = new FileHandler();
+							Date testDate = test2.FileReadCSVDate(myFile2, columnName);
+						
+							
+					//for testing purposes
+							System.out.println(testDate.getDate());
+							for(Student a : testDate.getStudents())
+							{
+								int i =0;
+								System.out.println(a.ASURITE);
+								//dtm.addRow(testDate.getStudents(i).getFirstN(), testDate.getStudents(i).getASURITE());
+								i++;
+
+							}
+
 							days.add(testDate);
-							/*for(Date a : testDates)
-							{	
-								//add each date to JTable
-								dtm.addColumn(new Object[] {   });
-							}*/
 							
 							//This if statement will be replaced with a true/false if attendance is added
-							if(true)
+							//if the date's student arraylist is empty, then
+							if(!testDate.getStudents().isEmpty())
 							{
 								JPanel attendanceInfoPanel = new JPanel();
 								attendanceInfoPanel.setLayout(new BoxLayout(attendanceInfoPanel, BoxLayout.PAGE_AXIS));
 								JDialog attendanceDialog = new JDialog(frame, "About");
-								JLabel attendanceLabel = new JLabel("Data loaded for " + " users in the roster");
+								
+								
+								//getting size for the label below
+								int numOfLoaded = 0;
+								numOfLoaded = testDate.getStudents().size();
+								
+								//new student checker
+								int newStuds = 0;
+								
+								JLabel attendanceLabel = new JLabel("Data loaded for " + numOfLoaded + " users in the roster");
 								attendanceInfoPanel.add(attendanceLabel);
 								//If statement for if additional attendees not on roster
 								if(true) 
 								{
-									JLabel additionalLabel = new JLabel(" attional attendee was found:");
+									JLabel additionalLabel = new JLabel(newStuds + " additional attendee was found:");
 									//this will be a for loop for x users loaded
+									//while(testDate)
 									JLabel additionalLabelInfo = new JLabel(", connected for " + " minute");
 									attendanceInfoPanel.add(additionalLabel);
 									attendanceInfoPanel.add(additionalLabelInfo);

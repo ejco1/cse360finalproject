@@ -12,9 +12,9 @@ import javax.swing.table.TableModel;
 
 public class FileHandler 
 {
-	public static List<Student> FileReadCSV(File myFile)
+	public static ArrayList<Student> FileReadCSV(File myFile)
 	{
-		List<Student> students = new ArrayList<>();
+		ArrayList<Student> students = new ArrayList<>();
 		File newFile = myFile;
 		String line = "";
 		String delimeter = ",";
@@ -37,6 +37,7 @@ public class FileHandler
 	}
 	public static Date FileReadCSVDate(File myFile, String d)
 	{
+		System.out.println("hi");
 		Date date1 = new Date(d);
 		File newFile = myFile;
 		String line = "";
@@ -46,13 +47,18 @@ public class FileHandler
 			line = br.readLine();
 			while(line != null)
 			{
+				System.out.println("hi 2");
+
 				String[] dateElements = line.split(delimeter);
 				double stuTime = Double.parseDouble(dateElements[1]);
 				Student temp = new Student();
 				temp.ASURITE = dateElements[0];
 				date1.addStudent(temp, stuTime);
-				//Dates.add(newDate);
 				line = br.readLine();
+				
+				//tests
+				System.out.println(dateElements[0]);
+				System.out.println(temp.getASURITE());
 			}
 		}
 		catch(IOException e) 
@@ -98,13 +104,4 @@ public class FileHandler
 		}
 		
 	}
-	/*
-	public static Date createDate(String[] elements)
-	{
-		String ASURITE = elements[0];
-		String time = elements[1];
-		//Date tempDate = addStudent(ASURITE, time);
-		return tempDate;
-	}
-	*/
 }
