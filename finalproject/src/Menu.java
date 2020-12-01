@@ -46,7 +46,7 @@ public class Menu extends JFrame {
 		save = new JMenuItem("Save");
 		plotData = new JMenuItem("Plot data");
 		aboutItem = new JMenuItem("About");
-
+		
 		//Data Items
 		ArrayList<Date> days = new ArrayList<Date>();
 		ArrayList<Student> students = new ArrayList<Student>();
@@ -67,7 +67,7 @@ public class Menu extends JFrame {
 					
 					myFile = fileChooser.getSelectedFile();
 					FileHandler test = new FileHandler();
-					List<Student> testStudents = test.FileReadCSV(myFile);
+					ArrayList<Student> testStudents = test.FileReadCSV(myFile);
 					//create defaule JTable to add students to
 					dtm = new DefaultTableModel(0, 0);
 					String[] header = {"ID",        						
@@ -134,8 +134,7 @@ public class Menu extends JFrame {
 							FileHandler test = new FileHandler();
 							Date testDate = test.FileReadCSVDate(myFile2, columnName);
 							days.add(testDate);
-							
-							
+
 							/*for(Date a : testDates)
 							{	
 								//add each date to JTable
@@ -161,6 +160,7 @@ public class Menu extends JFrame {
 								}
 								attendanceInfoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 								attendanceDialog.add(attendanceInfoPanel);
+								attendanceDialog.setLocationRelativeTo(null);
 								attendanceDialog.setSize(400, 400);
 								attendanceDialog.setVisible(true);
 							}
@@ -173,7 +173,19 @@ public class Menu extends JFrame {
 		save.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{		
-				//This is where we save the roster	
+				//This is where we save the roster
+				int response;
+				File myFile;
+				JFileChooser fileChooser = new JFileChooser("");
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				response = fileChooser.showSaveDialog(null);
+				if(response == JFileChooser.APPROVE_OPTION)
+				{
+					table.setVisible(true);
+					myFile = fileChooser.getSelectedFile();
+					FileHandler test = new FileHandler();
+					test.FileSaveCSV(dtm, myFile);
+				}
 			}
 		});
 		/*

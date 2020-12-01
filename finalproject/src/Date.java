@@ -35,8 +35,22 @@ public class Date {
 	public void addStudent(Student s, double t){
 	    Student toBeAdded = s;
 	    double time = Math.round(t/75) * 100;
-	
+        if(findStudent(s) < 0){
 	    toBeAdded.setTime(time);
-	    arrStudents.add(toBeAdded);
-	}
+        arrStudents.add(toBeAdded);
+        } else {
+            arrStudents.get(findStudent(s)).time = arrStudents.get(findStudent(s)).time + time;
+        }
+    }
+    public int findStudent(Student s){
+        int index = 0;
+        for(Student yes : arrStudents){
+            if(yes.ASURITE.compareTo(s.ASURITE) == 0){
+                return index;
+            }
+            index++;
+        }
+
+        return -1;
+    }
 }
