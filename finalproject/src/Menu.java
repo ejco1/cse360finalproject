@@ -134,6 +134,7 @@ public class Menu extends JFrame {
 							FileHandler test = new FileHandler();
 							Date testDate = test.FileReadCSVDate(myFile2, columnName);
 							days.add(testDate);
+
 							
 							//This if statement will be replaced with a true/false if attendance is added
 							if(!testDate.getStudents().isEmpty())
