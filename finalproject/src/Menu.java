@@ -133,6 +133,7 @@ public class Menu extends JFrame {
 							myFile2 = fileChooser.getSelectedFile();
 							FileHandler test = new FileHandler();
 							Date testDate = test.FileReadCSVDate(myFile2, columnName);
+							System.out.println(testDate.getStudents());
 							days.add(testDate);
 							/*for(Date a : testDates)
 							{	
