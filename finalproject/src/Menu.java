@@ -27,38 +27,29 @@ public class Menu extends JFrame {
 	 */
 	Menu()
 	{
-		//Create the frame
 		frame = new JFrame("CSE360 Final Project");
 		
-		//Create the menu bar
 		menuBar = new JMenuBar();
 		
-		//Create the JTable
 		table = new JTable();
 		table.setOpaque(true);
 		
-		//JPanel for JTable
 		JPanel panel = new JPanel();
 		
-		//Create the menu bar items
 		file = new JMenu("File");
 		about = new JMenu("About");
     
-		//Create the menu items
 		loadRoster = new JMenuItem("Load a roster");
 		addAttendance = new JMenuItem("Add attendance");
 		save = new JMenuItem("Save");
 		plotData = new JMenuItem("Plot data");
 		aboutItem = new JMenuItem("About");
 		
-		//Data Items
 		ArrayList<Date> days = new ArrayList<Date>();
 		ArrayList<Student> students = new ArrayList<Student>();
-		//Action listener for the load roster 
 		loadRoster.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
-				//This is where we load roster
 				File myFile;
 				int response;
 				JFileChooser fileChooser = new JFileChooser("");
@@ -67,12 +58,10 @@ public class Menu extends JFrame {
 				if(response == JFileChooser.APPROVE_OPTION)
 				{
 					table.setVisible(true);
-					
 					myFile = fileChooser.getSelectedFile();
 					FileHandler test = new FileHandler();
 					ArrayList<Student> testStudents = new ArrayList<Student>();
 					testStudents = test.FileReadCSV(myFile);
-					//create default JTable to add students to
 					dtm = new DefaultTableModel(0, 0);
 					String[] header = {"ID",        						
 							"First Name",
@@ -84,17 +73,13 @@ public class Menu extends JFrame {
 					table.setModel(dtm);
 					for(Student a : testStudents)
 					{	
-						//copy to students
 						students.add(a);
-						//add each student to JTable
 						dtm.addRow(new Object[] {a.ID, a.firstN, a.lastN, a.program, a.academicLevel, a.ASURITE});
 					}
-					//and set the panel to visible
 					panel.setVisible(true);
 				}
 			}
 		});
-		//Action listener for the add attendance function
 		addAttendance.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
@@ -120,7 +105,6 @@ public class Menu extends JFrame {
 				attendanceBox.setSize(500,100);
 				attendanceBox.setLocationRelativeTo(null);
 				attendanceBox.setVisible(true);
-				//This is where we add attendance
 				fileButton.addActionListener(new ActionListener()	{
 					public void actionPerformed(ActionEvent event)
 					{
@@ -131,11 +115,8 @@ public class Menu extends JFrame {
 						response = fileChooser2.showOpenDialog(null);
 						if(response == JFileChooser.APPROVE_OPTION)
 						{
-							//add date column to JTable
 							String columnName = String.valueOf(monthList.getSelectedItem()) + " " + String.valueOf(numberList.getSelectedItem());
 							dtm.addColumn(columnName);
-							
-							//This is where we call method to parse file and add to table
 							myFile2 = fileChooser2.getSelectedFile();
 							
 							FileHandler test2 = new FileHandler();
@@ -143,17 +124,11 @@ public class Menu extends JFrame {
 							Date realStuds = new Date(columnName);
 							ArrayList<Student> newStuds = new ArrayList<Student>();
 							
-							//new student checker
 							int newStudNum = 0;
-							int sendhelp = 0;
-							
-							//instantiations
 							int index = -1;
 							int indexYeet;
 							boolean found = false;
-							double timeTemp;
 							
-							//loop to find new Students
 							for(Student a : testDate.getStudents())
 							{								
 								for(Student b : students)
@@ -182,7 +157,6 @@ public class Menu extends JFrame {
 							dtm.getDataVector().removeAllElements();
 						    revalidate();
 						    
-						    //print time for students
 						    for(Student a : students)
 							{
 								double time = 0;
@@ -194,37 +168,27 @@ public class Menu extends JFrame {
 										time = i.time;
 									}
 								}
-								
-								//add each student to JTable
 								dtm.addRow(new Object[] {a.ID, a.firstN, a.lastN, a.program, a.academicLevel, a.ASURITE, time});
-							}			
-							
-							//This if statement will be replaced with a true/false if attendance is added
-							//if the date's student arraylist is empty, then
+							}
+						    
 							if(!testDate.getStudents().isEmpty())
 							{
 								JPanel attendanceInfoPanel = new JPanel();
 								attendanceInfoPanel.setLayout(new BoxLayout(attendanceInfoPanel, BoxLayout.PAGE_AXIS));
 								JDialog attendanceDialog = new JDialog(frame, "Pick A Date");
-								
-								
-								//getting size for the label below
 								int numOfLoaded = 0;
 								numOfLoaded = realStuds.getStudents().size();
 								
 								JLabel attendanceLabel = new JLabel("Data loaded for " + numOfLoaded + " users in the roster");
 								attendanceInfoPanel.add(attendanceLabel);
-								//If statement for if additional attendees not on roster
 								if(true) 
 								{
 									String nonStuds = "";
 									JLabel additionalLabel = new JLabel(newStudNum + " additional attendee was found:");
-									//this will be a for loop for x users loaded
 									for(Student a : newStuds)
 									{
 										nonStuds = nonStuds + a.ASURITE + ", connected for " + a.time + " minutes<br/>";
 									}
-									//while(testDate)
 									JLabel additionalLabelInfo = new JLabel("<html>" + nonStuds + "</html>");
 									attendanceInfoPanel.add(additionalLabel);
 									attendanceInfoPanel.add(additionalLabelInfo);
@@ -240,11 +204,9 @@ public class Menu extends JFrame {
 				});
 			}
 		});
-		//Action listener for the save button
 		save.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{		
-				//This is where we save the roster
 				int response;
 				File myFile;
 				JFileChooser fileChooser = new JFileChooser("");
@@ -259,29 +221,20 @@ public class Menu extends JFrame {
 				}
 			}
 		});
-		//Action listener for plot data button
 		plotData.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
-				//This is where we print the graph
 				ScatterPlot example = new ScatterPlot("Plot Attendance Data");
-				// Instantiate a list of Dates for a Student..
-				
-				// Input into a dataset..
 				example.addDataset(days);
-				// Either add a JPanel, replace JTable, or use JTabbedPane
-				
             	example.setSize(800,400);
             	example.setLocationRelativeTo(null);
             	example.setVisible(true);
 			}
 			
 		});
-		//Action listener for about button
 		aboutItem.addActionListener(new ActionListener()	{
 			public void actionPerformed(ActionEvent event)
 			{
-				//This is where we open a dialog box 
 				JDialog aboutBox = new JDialog(frame, "About");
 				JLabel aboutTeam = new JLabel("CSE 360 Final Project by Ethan Co, Jordan Slater and Hunter Carmona");
 				aboutBox.add(aboutTeam);
@@ -290,26 +243,20 @@ public class Menu extends JFrame {
 				aboutBox.setVisible(true);
 			}
 		});
-		//Add menu items to file menu
 		file.add(loadRoster);
 		file.add(addAttendance);
 		file.add(save);
 		file.add(plotData);
-		
 		about.add(aboutItem);
 		
-		//Add menu's to menu bar
 		menuBar.add(file);
 		menuBar.add(about);
-		
-		//Add menu bar to the frame
+
 		frame.setJMenuBar(menuBar);
-		
-		//Add the JTable to the frame
+
 		panel.setVisible(false);
 		panel.add(new JScrollPane(table));
 		frame.add(panel);
-		
 		frame.setSize(1000, 1000);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
